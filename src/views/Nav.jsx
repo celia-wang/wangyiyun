@@ -1,10 +1,10 @@
-/**导航条 */
-import React, { useEffect, useState } from "react";
-import { NavData } from "../AxiosData/AxiosData";
-import { Swiper } from "antd-mobile";
+/** 导航条 */
+import React, { useEffect, useState } from 'react';
+import { Swiper } from 'antd-mobile';
+import { NavData } from '../AxiosData/AxiosData';
 
 export default function Nav() {
-  let [list, setList] = useState([]);
+  const [list, setList] = useState([]);
   useEffect(() => {
     NavData()
       .then((res) => {
@@ -12,12 +12,12 @@ export default function Nav() {
         setList(res.data.data);
       })
       .catch((err) => {
-        console.log("ERROR:导航条数据请求失败...");
+        console.log(`导航条数据请求失败:${err}`);
       });
   }, []);
-  const items = list.map((item, index) => {
+  const items = list.map((item) => {
     return (
-      <Swiper.Item key={index}>
+      <Swiper.Item key={item.id}>
         <li
           key={item.id}
           className="h-[100%]   flex flex-col justify-around  items-center text-[3.5vw] mr-6 "

@@ -1,10 +1,11 @@
-/**排行榜  */
-import react, { useEffect, useState } from "react";
-import { NewSongListData } from "../AxiosData/AxiosData";
-import Title from "../Tool/Title";
-import { Swiper } from "antd-mobile";
+/** 排行榜  */
+import React, { useEffect, useState } from 'react';
+import { Swiper } from 'antd-mobile';
+import { NewSongListData } from '../AxiosData/AxiosData';
+import Title from '../Tool/Title';
+
 export default function NewSongList() {
-  let [list, setList] = useState([]);
+  const [list, setList] = useState([]);
   useEffect(() => {
     NewSongListData()
       .then((res) => {
@@ -12,22 +13,19 @@ export default function NewSongList() {
         setList(res.data.data.blocks[3].creatives);
       })
       .catch((err) => {
-        console.log("ERROR:NewSongListData error...");
+        console.log(`NewSongListData:${err}`);
       });
   }, []);
 
-  const items = list.map((item, index) => {
+  const items = list.map((item) => {
     return (
-      <Swiper.Item key={index}>
+      <Swiper.Item key={item.resources[1].resourceId}>
         <div className="my-2 mr-2 mt-0 overflow-hidden">
-          <ul
-            key={index}
-            className="w-[88vw] bg-[#fff]   rounded-[10px] pt-4 pb-4 flex flex-col "
-          >
-            <li className="w-[88vw] pl-2 pr-5 flex justify-between">
+          <ul className="w-[88vw] bg-[#fff]   rounded-[10px] pt-4 pb-4 flex flex-col ">
+            <li className="w-[75vw] pl-2 pr-2 flex justify-between">
               <div>
                 {item.uiElement.mainTitle.title}
-                <span></span>
+                <span />
               </div>
               <span className=" text-[#939ba1]">
                 {item.uiElement.mainTitle.titleDesc}
@@ -36,7 +34,7 @@ export default function NewSongList() {
             {item.resources.map((vul, i) => {
               return (
                 <li
-                  key={i}
+                  key={vul.resourceId}
                   className="w-[88vw] pl-2 pt-[2.7vw] flex justify-between"
                 >
                   <img
@@ -66,7 +64,7 @@ export default function NewSongList() {
   return (
     <div className="pl-[2vw]">
       <Title>排行榜</Title>
-      <Swiper slideSize={90} trackOffset={10} indicator={() => null}>
+      <Swiper slideSize={96} trackOffset={10} indicator={() => null}>
         {items}
       </Swiper>
     </div>

@@ -1,18 +1,18 @@
-import React, { useState, useRef } from "react";
-import China from "./China";
-import HKT from "./HKT";
-import West from "./West";
-import Korea from "./Korea";
-import Jepan from "./Japan";
-import { Tabs, Swiper } from "antd-mobile";
+import React, { useState, useRef } from 'react';
+import { Tabs, Swiper } from 'antd-mobile';
+import China from './China';
+import HKT from './HKT';
+import West from './West';
+import Korea from './Korea';
+import Jepan from './Japan';
 
 export default function List() {
   const tabItems = [
-    { key: "China", title: "内地" },
-    { key: "HKT", title: "港台" },
-    { key: "West", title: "欧美" },
-    { key: "Korea", title: "韩国" },
-    { key: "Japan", title: "日本" },
+    { key: 'China', title: '内地' },
+    { key: 'HKT', title: '港台' },
+    { key: 'West', title: '欧美' },
+    { key: 'Korea', title: '韩国' },
+    { key: 'Japan', title: '日本' }
   ];
   const swiperRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(1);

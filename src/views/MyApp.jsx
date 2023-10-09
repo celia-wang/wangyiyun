@@ -1,15 +1,14 @@
-import React, { useState } from "react";
-import { Icon } from "@iconify/react";
-import { Button, Popup } from "antd-mobile";
-import Banner from "./Banner.jsx";
-import Nav from "./Nav";
-import PlayList from "./PlayList";
-import CD from "./CD";
-import NewSongList from "./NewSongList";
-import HotTopic from "./HotTopic";
-import Calendar from "./Calendar";
-
-import { NavLink } from "react-router-dom";
+import React, { useState } from 'react';
+import { Icon } from '@iconify/react';
+import { Popup } from 'antd-mobile';
+import { NavLink } from 'react-router-dom';
+import Banner from './Banner';
+import Nav from './Nav';
+import PlayList from './PlayList';
+import CD from './CD';
+import NewSongList from './NewSongList';
+import HotTopic from './HotTopic';
+import Calendar from './Calendar';
 
 export default function MyApp() {
   const [visible, setVisible] = useState(false);
@@ -17,27 +16,31 @@ export default function MyApp() {
   //   return (
   //     <>
   //       <Button onClick={() => setVisible(true)}>显示背景蒙层</Button>
-
   //     </>
   //   );
   // }
   return (
-    <>
+    <div>
       {/* 首页 */}
-      <div className="bg-[#f4f4f4] w-[100%] h-[100%]">
+      <div className="bg-[#f4f4f4] w-[100%] h-[100%] overflow-hidden">
         {/* 头部 */}
-        <div className=" w-[100vw] h-[20vw] p-[3vw] pl-[1vw] flex justify-between items-center  ">
+        <div className=" w-[100%] h-[20vw] p-[3vw] pl-[1vw] flex justify-between items-center  ">
           <Popup
             visible={visible}
             onMaskClick={() => {
               setVisible(false);
             }}
             position="left"
-            bodyStyle={{ width: "80vw" }}
+            bodyStyle={{ width: '80vw' }}
           >
             内容
           </Popup>
-          <div onClick={() => setVisible(true)}>
+          <div
+            onClick={() => {
+              setVisible(true);
+            }}
+            aria-hidden="true"
+          >
             <Icon className=" w-7 h-7" icon="material-symbols:menu" />
           </div>
 
@@ -70,8 +73,8 @@ export default function MyApp() {
         <NewSongList /> {/* 排行榜 */}
         <HotTopic /> {/* 热门话题 */}
         <Calendar /> {/* 音乐日历 */}
-        <div className="w-[100%] h-[12vw]"></div>
+        <div className="w-[100%] h-[12vw]" />
       </div>
-    </>
+    </div>
   );
 }

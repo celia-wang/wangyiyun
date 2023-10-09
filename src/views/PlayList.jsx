@@ -1,11 +1,11 @@
-/**推荐歌单 数据未渲染 */
-import React, { useEffect, useState } from "react";
-import Scroll from "../Tool/Scroll";
-import Title from "../Tool/Title";
-import { PlayListData } from "../AxiosData/AxiosData";
-import { Ellipsis, Swiper } from "antd-mobile";
+/** 推荐歌单 数据未渲染 */
+import React, { useEffect, useState } from 'react';
+import { Ellipsis, Swiper } from 'antd-mobile';
+import Title from '../Tool/Title';
+import { PlayListData } from '../AxiosData/AxiosData';
+
 export default function PlayList() {
-  let [list, setList] = useState([]);
+  const [list, setList] = useState([]);
   useEffect(() => {
     PlayListData()
       .then((res) => {
@@ -13,27 +13,27 @@ export default function PlayList() {
         // console.log(res.data.data.blocks[1].creatives);
       })
       .catch((err) => {
-        console.log("ERROR:推荐歌单数据请求失败...");
+        // eslint-disable-next-line no-console
+        console.log(`推荐歌单数据请求失败:${err}`);
       });
   }, []);
   // const indexList = list[0].resources;
   const indexItem = list.map((vul, i) => {
-    if (i == 0) {
+    if (i === 0) {
       return (
-        <Swiper.Item key={i}>
+        <Swiper.Item key={vul.resources[0].resourceId}>
           <Swiper
-            key={i}
             autoplay
             loop
             indicator={() => null}
             direction="vertical"
-            style={{ "--height": "50vw" }}
+            style={{ '--height': '50vw' }}
           >
-            {vul.resources.map((item, index) => {
+            {vul.resources.map((item) => {
               return (
-                <Swiper.Item key={index}>
+                <Swiper.Item key={item.resourceId}>
                   <div
-                    key={index}
+                    key={item.uiElement.image.imageUrl}
                     className="w-[31vw] h-[100%] mr-3 rounded-lg"
                   >
                     <img
@@ -56,13 +56,14 @@ export default function PlayList() {
         </Swiper.Item>
       );
     }
+    return null;
   });
 
   const items = list.map((item, index) => {
     if (index >= 1) {
       return (
-        <Swiper.Item key={index}>
-          <div key={index} className="w-[31vw] h-[100%] mr-3 rounded-lg">
+        <Swiper.Item key={item.resources[0].resourceId}>
+          <div className="w-[31vw] h-[100%] mr-3 rounded-lg">
             <img
               className="w-[31vw] h-[31vw]"
               src={item.uiElement.image.imageUrl}
@@ -79,13 +80,13 @@ export default function PlayList() {
         </Swiper.Item>
       );
     }
+    return null;
   });
   // console.log(items);
 
   return (
     <div className="pl-[2vw]">
       <Title>推荐歌单</Title>
-
       <Swiper slideSize={35} trackOffset={10} indicator={() => null}>
         {indexItem}
         {items}

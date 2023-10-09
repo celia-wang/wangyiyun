@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from "react";
-import { TopListData, PalyListData } from "../AxiosData/SearchData"
-import { Swiper } from "antd-mobile";
-import Card from "./Card";
-import { fetchToplistDetail } from "../AxiosData/SearchData";
+import React, { useEffect, useState } from 'react';
+import { Swiper } from 'antd-mobile';
+import { TopListData } from '../AxiosData/SearchData';
+import Card from './Card';
+
 export default function ListNew() {
-  const [topList,setTopList] = useState([])
+  const [topList, setTopList] = useState([]);
   useEffect(() => {
-    TopListData().then( data => setTopList(data.data.list)).catch(err => console.log(err))
-  },[])
+    TopListData()
+      .then((data) => setTopList(data.data.list))
+      .catch((err) => console.log(err));
+  }, []);
   // console.log(topList.slice(0,4));
   // const [palyListId, setPalyListId] = useState([]);
   // useEffect(() => {
@@ -30,10 +32,9 @@ export default function ListNew() {
   //     .then((res) => console.log(res.slice(0, 10)))
   //     .catch((err) => console.log(err));
   // }, []);
-  return topList.slice(0,4).map((vul) => 
-  <Swiper.Item> 
-  <Card id={vul.id} name={vul.name} />
-  </Swiper.Item>
-  ) 
-  
+  return topList.slice(0, 4).map((vul) => (
+    <Swiper.Item>
+      <Card id={vul.id} name={vul.name} />
+    </Swiper.Item>
+  ));
 }
